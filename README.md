@@ -1,2 +1,1 @@
-# JavaLearningPlan
-Java learning process
+学习路线：
