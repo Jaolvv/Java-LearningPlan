@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <aop:aspectj-autoproxy />
+    <bean id="myInterceptor2" class="com.jaolvv.AOPexercise.Second.MyInterceptor2"></bean>
+    <bean id="person" class="com.jaolvv.AOPexercise.Second.PersonImpl"></bean>
+
+    <aop:config>
+        <aop:aspect id="asp" ref="myInterceptor2">
+            <aop:pointcut expression="execution(* com.jaolvv.AOPexercise.Second.PersonImpl.*(..))" id="mycut"/>
+            <aop:before pointcut-ref="mycut" method="doAccessCheck"/>
+            <aop:after pointcut-ref="mycut" method="doAfter"/>
+            <aop:after-returning pointcut-ref="mycut" method="doAfterReturning"/>
+            <aop:after-throwing pointcut-ref="mycut" method="doAfterThrowing"/>
+            <aop:around pointcut-ref="mycut" method="doBasicProfiling"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
