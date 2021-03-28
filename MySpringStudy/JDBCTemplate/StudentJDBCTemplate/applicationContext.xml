@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <!--  配置数据源  -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+
+        <!--  配置数据库驱动  -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+
+        <!-- 配置数据库的连接地址 -->
+        <property name="url" value="jdbc:mysql://localhost:3306/Spring?serverTimezone=UTC"/>
+
+        <!-- 配置数据库的用户名&密码 -->
+        <property name="username" value="root"/>
+        <property name="password" value="112800"/>
+    </bean>
+
+    <!--  配置JDBC模板  -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="studentDao" class="com.jaolvv.StudentJDBCTemplate.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+</beans>
