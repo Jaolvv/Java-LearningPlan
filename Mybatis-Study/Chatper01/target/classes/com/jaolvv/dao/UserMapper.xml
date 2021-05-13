@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Mapper接口 -->
+<mapper namespace="com.jaolvv.dao.UserMapper">
+    <!--  select查询语句  -->
+    <select id="getUserList" resultType="com.jaolvv.pojo.User">
+        select * from mybatis.user;
+    </select>
+
+    <!--通过id获取用户-->
+    <!--这里面的#{id}代表从外面传来的值-->
+    <select id="getUserById" resultType="com.jaolvv.pojo.User">
+        select * from mybatis.user where id = #{id}
+    </select>
+
+    <!--添加一个用户-->
+    <!--特别注意：除了select其他的都用parameterType：传入的参数类型-->
+    <insert id="addUser" parameterType="com.jaolvv.pojo.User">
+        insert into user(id,name,pwd) values (#{id},#{name},#{pwd})
+    </insert>
+
+    <!--通过id删除用户-->
+    <delete id="deleteUserById" parameterType="int">
+        delete from user where id=#{id}
+    </delete>
+
+    <!--修改用户-->
+    <update id="modify" parameterType="com.jaolvv.pojo.User">
+        update user set name=#{name},pwd=#{pwd} where id=#{id}
+    </update>
+
+</mapper>
